@@ -136,13 +136,13 @@ function generateBaseMap(): string {
 
         $gridSpacing = $width / 12;
         for ($i = 1; $i < 12; $i++) {
-            $x = $i * $gridSpacing;
+            $x = (int)($i * $gridSpacing);
             imageline($image, $x, 0, $x, $height, $grid);
         }
 
         $gridSpacing = $height / 6;
         for ($i = 1; $i < 6; $i++) {
-            $y = $i * $gridSpacing;
+            $y = (int)($i * $gridSpacing);
             imageline($image, 0, $y, $width, $y, $grid);
         }
 
@@ -150,13 +150,13 @@ function generateBaseMap(): string {
         $lonStep = 30;
         for ($lon = getLonMin(); $lon <= getLonMax(); $lon += $lonStep) {
             $pos = latLonToPixel(0, $lon);
-            imagestring($image, $fontSize, $pos[0] + 5, $height / 2 + 5, $lon . '°', $text);
+            imagestring($image, $fontSize, (int)$pos[0] + 5, (int)($height / 2) + 5, $lon . '°', $text);
         }
 
         $latStep = 30;
         for ($lat = getLatMin(); $lat <= getLatMax(); $lat += $latStep) {
             $pos = latLonToPixel($lat, 0);
-            imagestring($image, $fontSize, 5, $pos[1] - 10, $lat . '°', $text);
+            imagestring($image, $fontSize, 5, (int)$pos[1] - 10, $lat . '°', $text);
         }
 
         imagestring($image, $fontSize, 10, 10, getCornerLabel(0), $text);
