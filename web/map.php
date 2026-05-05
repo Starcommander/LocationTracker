@@ -8,6 +8,21 @@ if (!isset($_SESSION['user'])) {
 
 require_once __DIR__ . '/functions.php';
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+if (!is_dir(DATA_DIR)) {
+    mkdir(DATA_DIR, 0755, true);
+}
+
+if (!is_writable(DATA_DIR)) {
+    die('Error: Data directory is not writable: ' . DATA_DIR);
+}
+
+if (!extension_loaded('gd')) {
+    die('Error: GD extension is not loaded. Please install php-gd.');
+}
+
 $mapImage = generateMapWithUsers();
 $mapUrl = 'data/map_with_users.png?t=' . time();
 ?>

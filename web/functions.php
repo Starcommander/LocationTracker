@@ -2,6 +2,10 @@
 define('DATA_DIR', __DIR__ . '/data');
 define('SETTINGS_FILE', __DIR__ . '/settings.conf');
 
+if (!is_dir(DATA_DIR)) {
+    mkdir(DATA_DIR, 0755, true);
+}
+
 function loadSettings(): array {
     static $settings = null;
     if ($settings !== null) {
